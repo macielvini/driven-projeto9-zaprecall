@@ -59,6 +59,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Recursive', sans-serif;
+  background-color: #ffffd4;
 }
 `;
 
