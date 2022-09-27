@@ -1,9 +1,9 @@
 import React from "react";
-import { ReactDOM } from "react-dom";
 import GlobalStyle from "../globalStyles";
 import styled from "styled-components";
 import Header from "./Header";
 import CardAnswer from "./CardAnswer";
+import QuestionList from "./QuestionList";
 
 const colors = {
   bgColor: "#fb6b6b",
@@ -20,6 +20,7 @@ function App() {
       <GlobalStyle />
       <PhoneScreen>
         <Header />
+        <QuestionList />
         <CardAnswer colors={colors} NormalText={NormalText} />
       </PhoneScreen>
     </>
@@ -48,8 +49,4 @@ const PhoneScreen = styled.div`
 
 const NormalText = styled.p`
   font-size: 18px;
-`;
-
-const BoldText = styled.p`
-  font-size: 16px;
 `;
