@@ -64,4 +64,6 @@ const Footer = styled.footer`
 
   background-color: #fff;
   padding: 9px 0 20px;
+
+  border-radius: 0 0 20px 20px;
 `;
