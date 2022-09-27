@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Question from "./Question";
 
-function QuestionList() {
+function QuestionList(props) {
   const questions = [
     // { question: "", answer: "" },
     {
@@ -21,7 +21,13 @@ function QuestionList() {
   return (
     <QuestionWrapper>
       {questions.map((q, i) => (
-        <Question question={q} key={i} index={i + 1} />
+        <Question
+          questionObject={q}
+          key={i}
+          index={i + 1}
+          colors={props.colors}
+          NormalText={props.NormalText}
+        />
       ))}
     </QuestionWrapper>
   );
@@ -35,4 +41,10 @@ const QuestionWrapper = styled.ul`
   gap: 25px;
 
   margin-top: 50px;
+
+  overflow: auto;
+
+  li:last-of-type {
+    margin-bottom: 130px;
+  }
 `;

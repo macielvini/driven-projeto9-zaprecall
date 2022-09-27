@@ -20,7 +20,7 @@ function App() {
       <GlobalStyle />
       <PhoneScreen>
         <Header />
-        <QuestionList />
+        <QuestionList colors={colors} NormalText={NormalText} />
         <CardAnswer colors={colors} NormalText={NormalText} />
       </PhoneScreen>
     </>
