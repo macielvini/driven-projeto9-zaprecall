@@ -1,18 +1,19 @@
 import styled from "styled-components";
+import Colors from "./Colors";
 
 function CardAnswer(props) {
-  const { colors, NormalText } = props;
+  const { NormalText } = props;
 
   const Forgot = styled(Answer)`
-    background-color: ${colors.bgForgot};
+    background-color: ${Colors().bgForgot};
   `;
 
   const AlmostForgot = styled(Answer)`
-    background-color: ${colors.bgAlmostForgot};
+    background-color: ${Colors().bgAlmostForgot};
   `;
 
   const Zap = styled(Answer)`
-    background-color: ${colors.bgZap};
+    background-color: ${Colors().bgZap};
   `;
 
   const Result = styled(NormalText)`

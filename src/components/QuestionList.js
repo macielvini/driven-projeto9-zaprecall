@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Question from "./Question";
 
-function QuestionList(props) {
+function QuestionList({ NormalText }) {
   const questions = [
     // { question: "", answer: "" },
     {
@@ -18,6 +18,7 @@ function QuestionList(props) {
       answer: "interagindo com a DOM para colocar componentes React na mesma",
     },
   ];
+
   return (
     <QuestionWrapper>
       {questions.map((q, i) => (
@@ -25,8 +26,7 @@ function QuestionList(props) {
           questionObject={q}
           key={i}
           index={i + 1}
-          colors={props.colors}
-          NormalText={props.NormalText}
+          NormalText={NormalText}
         />
       ))}
     </QuestionWrapper>
