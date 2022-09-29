@@ -34,6 +34,8 @@ function QuestionList() {
   const [questionsDone, setQuestionsDone] = React.useState(0);
 
   function updateQuestionStatus(question, newStatus) {
+    if (!question) return;
+
     if (newStatus === "opened" && isThereAnOpenedQuestion(questionList)) {
       return;
     }
@@ -43,9 +45,10 @@ function QuestionList() {
 
     if (question.status === "rotated" || question.status === "opened") {
       setLastOpenedQuestion(question);
+    } else {
+      setLastOpenedQuestion({});
     }
 
-    // setLastOpenedQuestion("");
     setQuestionList([...newQuestionList]);
     setQuestionsDone(updateQuestionsDone(newQuestionList));
   }
