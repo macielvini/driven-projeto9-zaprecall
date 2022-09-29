@@ -29,19 +29,66 @@ const questions = [
 ];
 
 function QuestionList() {
-  const [question, setQuestion] = React.useState(questions[0]);
+  const [questionList, setQuestionList] = React.useState(questions);
+  const [lastOpenedQuestion, setLastOpenedQuestion] = React.useState();
+  const [questionsDone, setQuestionsDone] = React.useState(0);
+
+  function updateQuestionStatus(question, newStatus) {
+    if (newStatus === "opened" && isThereAnOpenedQuestion(questionList)) {
+      return;
+    }
+
+    question.status = newStatus;
+    const newQuestionList = questionList;
+
+    if (question.status === "rotated" || question.status === "opened") {
+      setLastOpenedQuestion(question);
+    }
+
+    // setLastOpenedQuestion("");
+    setQuestionList([...newQuestionList]);
+    setQuestionsDone(updateQuestionsDone(newQuestionList));
+  }
+
+  function isThereAnOpenedQuestion(list) {
+    const openedQuestionList = list.filter(
+      (q) => q.status === "opened" || q.status === "rotated"
+    );
+
+    return openedQuestionList.length > 0;
+  }
+
+  function updateQuestionsDone(list) {
+    const doneQuestions = list.filter(
+      (q) =>
+        q.status === "forgot" ||
+        q.status === "almostForgot" ||
+        q.status === "zap"
+    );
+
+    return doneQuestions.length;
+  }
 
   return (
     <>
       <QuestionWrapper>
-        {/* {questions.map((q, i) => (
+        {questions.map((q, i) => (
           <Question
+            key={i}
+            questionObj={q}
+            index={i}
+            updateQuestionStatus={updateQuestionStatus}
+            setLastOpenedQuestion={setLastOpenedQuestion}
           />
-        ))} */}
-        <Question questionObj={question} index={0} setQuestion={setQuestion} />
+        ))}
       </QuestionWrapper>
 
-      <CardAnswer questionObj={question} setQuestion={setQuestion} />
+      <CardAnswer
+        lastOpenedQuestion={lastOpenedQuestion}
+        updateQuestionStatus={updateQuestionStatus}
+        questionsLength={questionList.length}
+        questionsDone={questionsDone}
+      />
     </>
   );
 }

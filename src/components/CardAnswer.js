@@ -1,30 +1,34 @@
 import styled from "styled-components";
 import COLORS from "./Colors";
 
-function CardAnswer({ questionObj, setQuestion }) {
-  const { status } = questionObj;
-
-  function updateQuestionStatus(newStatus) {
-    if (status === "opened") {
-      const uptQuestion = { ...questionObj, status: newStatus };
-      setQuestion(uptQuestion);
-      console.log(newStatus);
-      return;
-    }
-
-    alert("Abra uma questão primeiro");
-  }
-
+function CardAnswer({
+  lastOpenedQuestion,
+  updateQuestionStatus,
+  questionsLength,
+  questionsDone,
+}) {
   return (
     <Footer>
       <AnswerList>
-        <Forgot onClick={() => updateQuestionStatus("forgot")}>Esqueci</Forgot>
-        <AlmostForgot onClick={() => updateQuestionStatus("almostForgot")}>
+        <Forgot
+          onClick={() => updateQuestionStatus(lastOpenedQuestion, "forgot")}
+        >
+          Esqueci
+        </Forgot>
+        <AlmostForgot
+          onClick={() =>
+            updateQuestionStatus(lastOpenedQuestion, "almostForgot")
+          }
+        >
           Quase não lembrei
         </AlmostForgot>
-        <Zap onClick={() => updateQuestionStatus("zap")}>Zap!</Zap>
+        <Zap onClick={() => updateQuestionStatus(lastOpenedQuestion, "zap")}>
+          Zap!
+        </Zap>
       </AnswerList>
-      <Result>0/4 CONCLUÍDOS</Result>
+      <Result>
+        {questionsDone}/{questionsLength} CONCLUÍDOS
+      </Result>
     </Footer>
   );
 }

@@ -7,7 +7,7 @@ import helpIcon from "../assets/img/help-circle-icon.svg";
 import checkIcon from "../assets/img/checkmark-circle-icon.svg";
 import COLORS from "./Colors";
 
-function Question({ questionObj, index, setQuestion }) {
+function Question({ questionObj, index, updateQuestionStatus }) {
   const { question, answer, status } = questionObj;
   const colors = {
     forgot: COLORS.bgForgot,
@@ -15,19 +15,20 @@ function Question({ questionObj, index, setQuestion }) {
     zap: COLORS.bgZap,
   };
 
-  function updateQuestionStatus(newStatus) {
-    const uptQuestion = { ...questionObj, status: newStatus };
-    setQuestion(uptQuestion);
-  }
+  const icons = {
+    forgot: closeIcon,
+    almostForgot: helpIcon,
+    zap: checkIcon,
+  };
 
   let JSX = (
     <>
       <Flashcard status={status} statusColor={colors}>
         <QuestionTitle>Pergunta {index + 1}</QuestionTitle>
         <img
-          src={playIcon}
+          src={!status ? playIcon : icons[status]}
           alt=""
-          onClick={() => updateQuestionStatus("opened")}
+          onClick={() => updateQuestionStatus(questionObj, "opened")}
         />
       </Flashcard>
     </>
@@ -40,7 +41,7 @@ function Question({ questionObj, index, setQuestion }) {
         <img
           src={RotateIcon}
           alt=""
-          onClick={() => updateQuestionStatus("rotated")}
+          onClick={() => updateQuestionStatus(questionObj, "rotated")}
         />
       </FlashcardOpened>
     );
@@ -85,7 +86,6 @@ const Flashcard = styled.li`
   img {
     height: 23px;
     cursor: pointer;
-    fill: red;
   }
 `;
 
