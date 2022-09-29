@@ -1,30 +1,60 @@
 import React from "react";
 import styled from "styled-components";
-import PlayIcon from "../assets/img/play-outline-icon.svg";
 import RotateIcon from "../assets/img/setinha.png";
-import Colors from "./Colors";
+import playIcon from "../assets/img/play-outline-icon.svg";
+import closeIcon from "../assets/img/close-circle-icon.svg";
+import helpIcon from "../assets/img/help-circle-icon.svg";
+import checkIcon from "../assets/img/checkmark-circle-icon.svg";
+import COLORS from "./Colors";
 
-function Question({ questionObject, index, NormalText }) {
-  const { question, answer } = questionObject;
-  const [isOpened, setIsOpened] = React.useState(false);
+function Question({ questionObj, index, setQuestion }) {
+  const { question, answer, status } = questionObj;
+  const colors = {
+    forgot: COLORS.bgForgot,
+    almostForgot: COLORS.bgAlmostForgot,
+    zap: COLORS.bgZap,
+  };
 
-  const [cardText, setCardText] = React.useState(question);
+  function updateQuestionStatus(newStatus) {
+    const uptQuestion = { ...questionObj, status: newStatus };
+    setQuestion(uptQuestion);
+  }
 
-  return (
+  let JSX = (
     <>
-      {isOpened ? (
-        <FlashcardOpened>
-          <NormalText>{cardText}</NormalText>
-          <img src={RotateIcon} alt="" onClick={() => setCardText(answer)} />
-        </FlashcardOpened>
-      ) : (
-        <Flashcard>
-          <QuestionTitle>Pergunta {index}</QuestionTitle>
-          <img src={PlayIcon} alt="" onClick={() => setIsOpened(true)} />
-        </Flashcard>
-      )}
+      <Flashcard status={status} statusColor={colors}>
+        <QuestionTitle>Pergunta {index + 1}</QuestionTitle>
+        <img
+          src={playIcon}
+          alt=""
+          onClick={() => updateQuestionStatus("opened")}
+        />
+      </Flashcard>
     </>
   );
+
+  if (status === "opened") {
+    JSX = (
+      <FlashcardOpened>
+        <NormalText>{question}</NormalText>
+        <img
+          src={RotateIcon}
+          alt=""
+          onClick={() => updateQuestionStatus("rotated")}
+        />
+      </FlashcardOpened>
+    );
+  }
+
+  if (status === "rotated") {
+    JSX = (
+      <FlashcardOpened>
+        <NormalText>{answer}</NormalText>
+      </FlashcardOpened>
+    );
+  }
+
+  return JSX;
 }
 
 export default Question;
@@ -48,16 +78,21 @@ const Flashcard = styled.li`
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
 
+  text-decoration: ${(props) => (props.status ? "line-through" : "none")};
+  color: ${(props) =>
+    !props.status ? COLORS.black : props.statusColor[props.status]};
+
   img {
     height: 23px;
     cursor: pointer;
+    fill: red;
   }
 `;
 
 const FlashcardOpened = styled(Flashcard)`
   display: block;
   min-height: 130px;
-  background-color: ${Colors().bgCard};
+  background-color: ${COLORS.bgCard};
   padding: 20px 10px;
 
   position: relative;
@@ -69,5 +104,11 @@ const FlashcardOpened = styled(Flashcard)`
 
     width: 30px;
     height: 20px;
+
+    display: block;
   }
+`;
+
+const NormalText = styled.p`
+  font-size: 18px;
 `;

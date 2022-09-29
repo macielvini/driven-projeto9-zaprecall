@@ -1,35 +1,48 @@
+import React from "react";
 import styled from "styled-components";
 import Question from "./Question";
+import CardAnswer from "./CardAnswer";
 
-function QuestionList({ NormalText }) {
-  const questions = [
-    // { question: "", answer: "" },
-    {
-      question: "O que é JSX?",
-      answer: "Uma extensão de linguagem do JavaScript",
-    },
-    {
-      question: "O React é __",
-      answer: "Uma biblioteca JavaScript para construção de interfaces",
-    },
-    { question: "Componentes devem iniciar com __", answer: "letra maiúscula" },
-    {
-      question: "O ReactDOM nos ajuda __",
-      answer: "interagindo com a DOM para colocar componentes React na mesma",
-    },
-  ];
+const questions = [
+  // { question: "", answer: "" },
+  {
+    question: "O que é JSX?",
+    answer: "Uma extensão de linguagem do JavaScript",
+    status: "",
+  },
+  {
+    question: "O React é __",
+    answer: "Uma biblioteca JavaScript para construção de interfaces",
+    status: "",
+  },
+  {
+    question: "Componentes devem iniciar com __",
+    answer: "letra maiúscula",
+    status: "",
+  },
+
+  {
+    question: "O ReactDOM nos ajuda __",
+    answer: "interagindo com a DOM para colocar componentes React na mesma",
+    status: "",
+  },
+];
+
+function QuestionList() {
+  const [question, setQuestion] = React.useState(questions[0]);
 
   return (
-    <QuestionWrapper>
-      {questions.map((q, i) => (
-        <Question
-          questionObject={q}
-          key={i}
-          index={i + 1}
-          NormalText={NormalText}
-        />
-      ))}
-    </QuestionWrapper>
+    <>
+      <QuestionWrapper>
+        {/* {questions.map((q, i) => (
+          <Question
+          />
+        ))} */}
+        <Question questionObj={question} index={0} setQuestion={setQuestion} />
+      </QuestionWrapper>
+
+      <CardAnswer questionObj={question} setQuestion={setQuestion} />
+    </>
   );
 }
 

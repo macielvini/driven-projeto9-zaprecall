@@ -1,32 +1,28 @@
 import styled from "styled-components";
-import Colors from "./Colors";
+import COLORS from "./Colors";
 
-function CardAnswer(props) {
-  const { NormalText } = props;
+function CardAnswer({ questionObj, setQuestion }) {
+  const { status } = questionObj;
 
-  const Forgot = styled(Answer)`
-    background-color: ${Colors().bgForgot};
-  `;
+  function updateQuestionStatus(newStatus) {
+    if (status === "opened") {
+      const uptQuestion = { ...questionObj, status: newStatus };
+      setQuestion(uptQuestion);
+      console.log(newStatus);
+      return;
+    }
 
-  const AlmostForgot = styled(Answer)`
-    background-color: ${Colors().bgAlmostForgot};
-  `;
-
-  const Zap = styled(Answer)`
-    background-color: ${Colors().bgZap};
-  `;
-
-  const Result = styled(NormalText)`
-    margin-top: 20px;
-    text-align: center;
-  `;
+    alert("Abra uma questão primeiro");
+  }
 
   return (
     <Footer>
       <AnswerList>
-        <Forgot>Esqueci</Forgot>
-        <AlmostForgot>Quase não lembrei</AlmostForgot>
-        <Zap>Zap!</Zap>
+        <Forgot onClick={() => updateQuestionStatus("forgot")}>Esqueci</Forgot>
+        <AlmostForgot onClick={() => updateQuestionStatus("almostForgot")}>
+          Quase não lembrei
+        </AlmostForgot>
+        <Zap onClick={() => updateQuestionStatus("zap")}>Zap!</Zap>
       </AnswerList>
       <Result>0/4 CONCLUÍDOS</Result>
     </Footer>
@@ -57,6 +53,18 @@ const Answer = styled.div`
   cursor: pointer;
 `;
 
+const Forgot = styled(Answer)`
+  background-color: ${COLORS.bgForgot};
+`;
+
+const AlmostForgot = styled(Answer)`
+  background-color: ${COLORS.bgAlmostForgot};
+`;
+
+const Zap = styled(Answer)`
+  background-color: ${COLORS.bgZap};
+`;
+
 const Footer = styled.footer`
   position: absolute;
   left: 0;
@@ -68,4 +76,10 @@ const Footer = styled.footer`
 
   border-radius: 0 0 20px 20px;
   box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+`;
+
+const Result = styled.p`
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: center;
 `;
