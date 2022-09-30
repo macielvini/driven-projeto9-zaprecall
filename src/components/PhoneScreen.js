@@ -1,12 +1,22 @@
 import styled from "styled-components";
 import Header from "./Header";
 import QuestionList from "./QuestionList";
+import StartAppScreen from "./StartScreen";
+import React from "react";
 
-export default function PhoneScreen(props) {
+export default function PhoneScreen() {
+  const [displayInitialScreen, setDisplayInitialScreen] = React.useState(true);
+
   return (
     <PhoneScreenWrapper>
-      <Header />
-      <QuestionList />
+      {displayInitialScreen ? (
+        <StartAppScreen setDisplayInitialScreen={setDisplayInitialScreen} />
+      ) : (
+        <MainAppScreen>
+          <Header />
+          <QuestionList />
+        </MainAppScreen>
+      )}
     </PhoneScreenWrapper>
   );
 }
@@ -16,15 +26,20 @@ const PhoneScreenWrapper = styled.div`
   height: 667px;
   background: #fb6b6b;
 
-  padding: 42px 37px 0px;
+  position: relative;
+  overflow: auto;
+  border-radius: 20px;
 
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+`;
+
+const MainAppScreen = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
 
-  position: relative;
+  padding: 42px 37px 0px;
 
-  border-radius: 20px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  height: 100%;
 `;

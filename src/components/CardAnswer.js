@@ -11,18 +11,23 @@ function CardAnswer({
     <Footer>
       <AnswerList>
         <Forgot
+          color={COLORS.bgForgot}
           onClick={() => updateQuestionStatus(lastOpenedQuestion, "forgot")}
         >
           Esqueci
         </Forgot>
         <AlmostForgot
+          color={COLORS.bgAlmostForgot}
           onClick={() =>
             updateQuestionStatus(lastOpenedQuestion, "almostForgot")
           }
         >
           Quase não lembrei
         </AlmostForgot>
-        <Zap onClick={() => updateQuestionStatus(lastOpenedQuestion, "zap")}>
+        <Zap
+          color={COLORS.bgZap}
+          onClick={() => updateQuestionStatus(lastOpenedQuestion, "zap")}
+        >
           Zap!
         </Zap>
       </AnswerList>
@@ -54,7 +59,17 @@ const Answer = styled.div`
 
   border-radius: 5px;
 
+  user-select: none;
   cursor: pointer;
+  transition: all 200ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 `;
 
 const Forgot = styled(Answer)`

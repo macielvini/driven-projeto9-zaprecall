@@ -26,6 +26,7 @@ const questions = [
     answer: "interagindo com a DOM para colocar componentes React na mesma",
     status: "",
   },
+  { question: "Teste", answer: "Testando", status: "" },
 ];
 
 function QuestionList() {
