@@ -43,7 +43,7 @@ function QuestionList() {
     question.status = newStatus;
     const newQuestionList = questionList;
 
-    if (question.status === "rotated" || question.status === "opened") {
+    if (question.status === "rotated") {
       setLastOpenedQuestion(question);
     } else {
       setLastOpenedQuestion({});
