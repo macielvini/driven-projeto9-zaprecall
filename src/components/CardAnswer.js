@@ -11,13 +11,13 @@ function CardAnswer({
     <Footer>
       <AnswerList>
         <Forgot
-          color={COLORS.bgForgot}
+          color={COLORS("forgot")}
           onClick={() => updateQuestionStatus(lastOpenedQuestion, "forgot")}
         >
           Esqueci
         </Forgot>
         <AlmostForgot
-          color={COLORS.bgAlmostForgot}
+          color={COLORS("almostForgot")}
           onClick={() =>
             updateQuestionStatus(lastOpenedQuestion, "almostForgot")
           }
@@ -25,7 +25,7 @@ function CardAnswer({
           Quase não lembrei
         </AlmostForgot>
         <Zap
-          color={COLORS.bgZap}
+          color={COLORS("zap")}
           onClick={() => updateQuestionStatus(lastOpenedQuestion, "zap")}
         >
           Zap!
@@ -73,15 +73,15 @@ const Answer = styled.div`
 `;
 
 const Forgot = styled(Answer)`
-  background-color: ${COLORS.bgForgot};
+  background-color: ${COLORS("forgot")};
 `;
 
 const AlmostForgot = styled(Answer)`
-  background-color: ${COLORS.bgAlmostForgot};
+  background-color: ${COLORS("almostForgot")};
 `;
 
 const Zap = styled(Answer)`
-  background-color: ${COLORS.bgZap};
+  background-color: ${COLORS("zap")};
 `;
 
 const Footer = styled.footer`

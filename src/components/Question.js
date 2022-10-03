@@ -9,11 +9,6 @@ import COLORS from "./Colors";
 
 function Question({ questionObj, index, updateQuestionStatus }) {
   const { question, answer, status } = questionObj;
-  const colors = {
-    forgot: COLORS.bgForgot,
-    almostForgot: COLORS.bgAlmostForgot,
-    zap: COLORS.bgZap,
-  };
 
   const icons = {
     forgot: closeIcon,
@@ -23,7 +18,7 @@ function Question({ questionObj, index, updateQuestionStatus }) {
 
   let JSX = (
     <>
-      <Flashcard status={status} statusColor={colors}>
+      <Flashcard status={status}>
         <QuestionTitle>Pergunta {index + 1}</QuestionTitle>
         <img
           src={!status ? playIcon : icons[status]}
@@ -80,7 +75,7 @@ const Flashcard = styled.li`
 
   text-decoration: ${(props) => (props.status ? "line-through" : "none")};
   color: ${(props) =>
-    !props.status ? COLORS.black : props.statusColor[props.status]};
+    !props.status ? COLORS("default") : COLORS(props.status)};
 
   img {
     height: 23px;
@@ -95,7 +90,7 @@ const Flashcard = styled.li`
 const FlashcardOpened = styled(Flashcard)`
   display: block;
   min-height: 130px;
-  background-color: ${COLORS.bgCard};
+  background-color: ${COLORS("cardBackground")};
   padding: 20px 10px;
 
   position: relative;
