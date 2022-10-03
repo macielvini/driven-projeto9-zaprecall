@@ -45,9 +45,7 @@ function Question({ questionObj, index, updateQuestionStatus }) {
         />
       </FlashcardOpened>
     );
-  }
-
-  if (status === "rotated") {
+  } else if (status === "rotated") {
     JSX = (
       <FlashcardOpened>
         <NormalText>{answer}</NormalText>
@@ -69,10 +67,11 @@ const Flashcard = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
   padding: 0 15px;
 
-  width: 300px;
+  width: 70vw;
+  max-width: 500px;
+  min-width: 200px;
   height: 65px;
 
   background: #ffffff;
@@ -86,6 +85,10 @@ const Flashcard = styled.li`
   img {
     height: 23px;
     cursor: pointer;
+  }
+
+  @media (min-width: 1000px) {
+    width: 300px;
   }
 `;
 

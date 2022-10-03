@@ -53,13 +53,13 @@ table {
 }
 
 body {
-  width: 100vw;
+  /* width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   font-family: 'Recursive', sans-serif;
-  background-color: #ffffd4;
+  /* background-color: #ffffd4; */
 }
 `;
 

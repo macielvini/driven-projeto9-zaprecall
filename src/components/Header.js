@@ -28,4 +28,6 @@ const HeaderWrapper = styled.header`
   font-size: 36px;
 
   color: #fff;
+
+  margin-top: 40px;
 `;

@@ -27,6 +27,8 @@ const questions = [
     status: "",
   },
   { question: "Teste", answer: "Testando", status: "" },
+  { question: "Teste", answer: "Testando", status: "" },
+  { question: "Teste", answer: "Testando", status: "" },
 ];
 
 function QuestionList() {
@@ -36,8 +38,7 @@ function QuestionList() {
 
   function updateQuestionStatus(question, newStatus) {
     if (!question) return;
-
-    if (newStatus === "opened" && isThereAnOpenedQuestion(questionList)) {
+    else if (newStatus === "opened" && isThereAnOpenedQuestion(questionList)) {
       return;
     }
 
@@ -110,5 +111,10 @@ const QuestionWrapper = styled.ul`
 
   li:last-of-type {
     margin-bottom: 130px;
+  }
+
+  @media (min-width: 1000px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;
