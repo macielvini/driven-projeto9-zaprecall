@@ -5,7 +5,7 @@ import playIcon from "../assets/img/play-outline-icon.svg";
 import closeIcon from "../assets/img/close-circle-icon.svg";
 import helpIcon from "../assets/img/help-circle-icon.svg";
 import checkIcon from "../assets/img/checkmark-circle-icon.svg";
-import COLORS from "./Colors";
+import COLORS from "../colors";
 
 function Question({ questionObj, index, updateQuestionStatus }) {
   const { question, answer, status } = questionObj;
